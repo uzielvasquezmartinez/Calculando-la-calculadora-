@@ -9,7 +9,6 @@ class LoginViewModel : ViewModel() {
     var username = mutableStateOf("")
     var loginError = mutableStateOf("")
 
-    // Función para validar login
     fun login(onSuccess: () -> Unit) {
         if (username.value == "admin" && password.value == "123") {
             loginError.value = ""

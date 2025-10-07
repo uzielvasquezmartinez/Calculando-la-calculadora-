@@ -2,6 +2,7 @@ package mx.edu.utez.calculadoramvvm.ui.screens
 
 import PrimaryButton
 import Title
+import UserInputField
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.myapp.ui.components.UserInputField
 import mx.edu.utez.calculadoramvvm.R
 import mx.edu.utez.calculadoramvvm.ui.components.images.CircularImage
 import mx.edu.utez.calculadoramvvm.ui.components.texts.Link
@@ -52,7 +52,6 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
             label = "Contraseña"
         )
 
-        // Mensaje de error si es incorrecto
         if (viewModel.loginError.value.isNotEmpty()) {
             Text(
                 text = viewModel.loginError.value,

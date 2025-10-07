@@ -1,5 +1,3 @@
-package com.example.myapp.ui.components
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

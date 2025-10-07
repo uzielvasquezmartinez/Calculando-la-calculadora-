@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CancelButton(
+fun CalculatorButton(
     text: String,
     onClick: () -> Unit
 ) {
@@ -15,8 +15,9 @@ fun CancelButton(
         shape = MaterialTheme.shapes.medium,
         elevation = ButtonDefaults.buttonElevation(4.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.LightGray
+            containerColor = Color(0xFF9C27B0)
         )
+
     ) {
         Text(text = text, style = MaterialTheme.typography.bodyLarge)
     }

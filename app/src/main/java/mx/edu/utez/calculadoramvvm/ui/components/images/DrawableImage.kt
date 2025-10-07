@@ -1,4 +1,4 @@
-package mx.edu.utez.myapp.ui.components
+package mx.edu.utez.calculadoramvvm.ui.components.images
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
