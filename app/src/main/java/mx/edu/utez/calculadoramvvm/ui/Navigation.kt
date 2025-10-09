@@ -10,7 +10,9 @@ import mx.edu.utez.calculadoramvvm.ui.screens.ForgotPasswordScreen
 import mx.edu.utez.calculadoramvvm.ui.screens.HomeScreen
 import mx.edu.utez.calculadoramvvm.ui.screens.LoginScreen
 import mx.edu.utez.calculadoramvvm.ui.screens.RegisterScreen
+import mx.edu.utez.calculadoramvvm.ui.screens.TicTacToeScreen
 import mx.edu.utez.calculadoramvvm.viewmodel.CalculatorViewModel
+import mx.edu.utez.calculadoramvvm.viewmodel.TicTacToeViewModel
 import mx.edu.utez.gato.viewmodel.LoginViewModel
 
 @Composable
@@ -28,6 +30,10 @@ fun Navigation() {
         composable("calculator") {
             val viewModel: CalculatorViewModel = viewModel() // instancia del ViewModel
             CalculatorScreen(viewModel = viewModel, navController = navController)
+        }
+        composable("tictactoe") {
+            val viewModel: TicTacToeViewModel = viewModel() // instancia del ViewModel
+            TicTacToeScreen(viewModel = viewModel, navController = navController)
         }
     }
 }
