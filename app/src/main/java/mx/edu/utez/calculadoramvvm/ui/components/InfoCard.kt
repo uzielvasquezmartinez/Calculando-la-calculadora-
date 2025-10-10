@@ -1,16 +1,23 @@
+package mx.edu.utez.calculadoramvvm.ui.components
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import mx.edu.utez.calculadoramvvm.viewmodel.MenuViewModel
 
 @Composable
 fun InfoCard(
     title: String,
-    description: String
+    description: String,
+    modifier: Modifier,
+    viewModel: MenuViewModel
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(6.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
