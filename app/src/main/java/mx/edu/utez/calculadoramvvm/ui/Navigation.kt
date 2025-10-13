@@ -12,6 +12,7 @@ import mx.edu.utez.calculadoramvvm.ui.screens.IncubadoraScreen
 import mx.edu.utez.calculadoramvvm.ui.screens.LoginScreen
 import mx.edu.utez.calculadoramvvm.ui.screens.RegisterScreen
 import mx.edu.utez.calculadoramvvm.ui.screens.TicTacToeScreen
+import mx.edu.utez.calculadoramvvm.ui.screens.UserViewScreen
 import mx.edu.utez.calculadoramvvm.viewmodel.CalculatorViewModel
 import mx.edu.utez.calculadoramvvm.viewmodel.IncubadoraViewModel
 import mx.edu.utez.calculadoramvvm.viewmodel.TicTacToeViewModel
@@ -40,6 +41,9 @@ fun Navigation() {
         composable("incubadora") {
             val viewModel: IncubadoraViewModel = viewModel() // instancia del ViewModel
             IncubadoraScreen(viewModel = viewModel, navController = navController)
+        }
+        composable("usuarios") {
+            UserViewScreen(navController = navController)
         }
     }
 }
