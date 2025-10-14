@@ -66,7 +66,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
 
         PrimaryButton("Iniciar sesión") {
             viewModel.login {
-                navController.navigate("calculator") {
+                navController.navigate("menu") {
                     popUpTo("login") { inclusive = true } // Evita volver al login
                 }
             }

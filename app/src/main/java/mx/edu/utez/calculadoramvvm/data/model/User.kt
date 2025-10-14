@@ -1,3 +1,16 @@
-package mx.edu.utez.gato.data.model
+package mx.edu.utez.calculadoramvvm.data.model
 
-class User(val nombre: String, val userName: String, val password: String)
+import androidx.annotation.DrawableRes
+import mx.edu.utez.calculadoramvvm.R
+
+data class User(
+    val id: Int,
+    @DrawableRes val imagen: Int = R.drawable.femaleprofile,
+    val nombre: String,
+    val correo: String,
+    val telefono: String,
+    val sexo: Int
+)
+
+//No es necesario hacer constructores
+//getters ni setters

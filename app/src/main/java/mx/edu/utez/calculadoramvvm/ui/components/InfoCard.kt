@@ -1,5 +1,7 @@
 package mx.edu.utez.calculadoramvvm.ui.components
 
+import android.R.attr.description
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
