@@ -59,5 +59,6 @@ fun Navigation() {
             val viewModel: PersonaViewModel = viewModel()
             PersonaScreen(viewModel, navController=navController)
         }
+        //Nuevas rutas aca
     }
 }
