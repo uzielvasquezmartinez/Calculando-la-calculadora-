@@ -35,10 +35,5 @@ class DynamicUserListViewModel : ViewModel() {
     private fun loadItems() {
         // Aquí cargarías los datos desde un repositorio (base de datos, API, etc.)
         // Por ahora, usamos datos de ejemplo.
-        _items.value = listOf(
-            User(id = 1, nombre = "Derick", password = "123", userName = "dericklagunes"),
-            User(id= 2, nombre = "Derick2", password = "123", userName = "dericklagunes2"),
-            User(id= 3, nombre = "Derick3", password = "123", userName = "dericklagunes3")
-        )
     }
 }
