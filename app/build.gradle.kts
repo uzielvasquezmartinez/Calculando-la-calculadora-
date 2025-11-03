@@ -43,7 +43,7 @@ dependencies {
     //
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
-    //
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.3")//
 
 
 
