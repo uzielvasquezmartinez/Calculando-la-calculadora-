@@ -40,6 +40,12 @@ android {
 }
 
 dependencies {
+    //
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+    //
+
+
 
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.core.ktx)
