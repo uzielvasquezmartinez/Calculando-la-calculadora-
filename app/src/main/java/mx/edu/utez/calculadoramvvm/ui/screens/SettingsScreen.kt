@@ -1,3 +1,6 @@
+package mx.edu.utez.calculadoramvvm.ui.screens
+
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,13 +32,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import mx.edu.utez.calculadoramvvm.viewmodel.SettingsViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     // Inyectamos el ViewModel
-    settingsViewModel: SettingsViewModel = viewModel()
+    settingsViewModel: SettingsViewModel = viewModel(), navController: NavController
 ) {
     // 1. Observamos el UiState del ViewModel
     val uiState by settingsViewModel.uiState.collectAsState()
@@ -54,13 +59,12 @@ fun SettingsScreen(
             )
         }
     ) { paddingValues ->
-        
+
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            
             // --- 1. Switch Modo Oscuro ---
             SettingRow(
                 title = "Modo Oscuro",
@@ -119,7 +123,6 @@ fun SettingsScreen(
         }
     }
 }
-
 /** Composable auxiliar para filas de settings (Switch) */
 @Composable
 private fun SettingRow(
@@ -140,7 +143,6 @@ private fun SettingRow(
         content()
     }
 }
-
 /** Composable auxiliar para filas de settings (Slider) */
 @Composable
 private fun SettingSlider(
@@ -161,6 +163,6 @@ private fun SettingSlider(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier.padding(horizontal = 8.dp)
-        )
-    }
+            )
+        }
 }

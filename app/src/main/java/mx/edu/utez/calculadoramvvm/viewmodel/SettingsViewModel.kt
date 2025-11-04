@@ -2,68 +2,77 @@ package mx.edu.utez.calculadoramvvm.viewmodel
 
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel // <-- Cambiamos a AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import mx.edu.utez.calculadoramvvm.data.model.SettingsUiState
-import mx.edu.utez.calculadoramvvm.ui.components.SettingsRepository
 
-/**
- * Hereda de AndroidViewModel para tener acceso al Application context.
- */
+import mx.edu.utez.calculadoramvvm.data.datastore.*
+import mx.edu.utez.calculadoramvvm.data.datastore.SettingsDataStore
+
+
+// Data class para el UiState (si aún no la tienes)
+data class SettingsUiState(
+    val isDarkMode: Boolean = false,
+    val volume: Float = 0.5f,
+    val brightness: Float = 0.5f,
+    val difficulty: String = "Normal"
+)
+
+// Cambiamos a AndroidViewModel y recibimos Application
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val settingsRepository: SettingsRepository
+    private val settingsDataStore: SettingsDataStore = SettingsDataStore(application)
+
+    private val _uiState = MutableStateFlow(SettingsUiState())
+    val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
     init {
-        val appContext = getApplication<Application>().applicationContext
-
-        val userSettingsDataStore = appContext.dataStore
-
-        // 3. Pasa la instancia de DataStore (NO el context) al repositorio
-        settingsRepository = SettingsRepository(userSettingsDataStore)
+        // Inicializar y recolectar los datos de DataStore
+        settingsDataStore.settingsFlow
+            .onEach { settingsData: SettingsData ->
+                // Actualizar el UiState con los valores persistidos
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        isDarkMode = settingsData.isDarkMode,
+                        volume = settingsData.volume,
+                        brightness = settingsData.brightness,
+                        difficulty = settingsData.difficulty
+                    )
+                }
+            }
+            .launchIn(viewModelScope) // Recolectar dentro del ámbito del ViewModel
     }
-
-    /**
-     * Expone el StateFlow a la UI.
-     * stateIn lo convierte en un Flow "caliente" que sobrevive a cambios
-     * de configuración (mientras el viewModelScope esté vivo).
-     */
-    val uiState: StateFlow<SettingsUiState> = settingsRepository.settingsUiStateFlow
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = SettingsUiState() // Estado inicial mientras carga DataStore
-        )
-
-    // --- Acciones de la UI ---
-    // La UI llama a estas funciones, que delegan el trabajo
-    // al repositorio dentro de una corutina.
+    // --- Funciones para cambiar y PERSISTIR los valores ---
 
     fun setDarkMode(isDarkMode: Boolean) {
         viewModelScope.launch {
-            settingsRepository.setDarkMode(isDarkMode)
+            settingsDataStore.saveDarkMode(isDarkMode) // Persistir en DataStore
         }
     }
 
+
+
     fun setVolume(volume: Float) {
         viewModelScope.launch {
-            settingsRepository.setVolume(volume)
+            settingsDataStore.saveVolume(volume) // Persistir en DataStore
         }
     }
 
     fun setBrightness(brightness: Float) {
         viewModelScope.launch {
-            settingsRepository.setBrightness(brightness)
+            settingsDataStore.saveBrightness(brightness) // Persistir en DataStore
         }
     }
 
     fun setDifficulty(difficulty: String) {
         viewModelScope.launch {
-            settingsRepository.setDifficulty(difficulty)
+            settingsDataStore.saveDifficulty(difficulty) // Persistir en DataStore
+            }
         }
-    }
 }

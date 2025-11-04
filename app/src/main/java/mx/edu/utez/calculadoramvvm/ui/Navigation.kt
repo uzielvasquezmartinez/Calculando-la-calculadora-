@@ -22,12 +22,14 @@ import mx.edu.utez.calculadoramvvm.viewmodel.PersonaViewModel
 import mx.edu.utez.calculadoramvvm.viewmodel.TicTacToeViewModel
 import mx.edu.utez.calculadoramvvm.viewmodel.UserListViewModel
 import mx.edu.utez.gato.viewmodel.LoginViewModel
+import mx.edu.utez.calculadoramvvm.viewmodel.SettingsViewModel
+import mx.edu.utez.calculadoramvvm.ui.screens.SettingsScreen
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = "settings") {
         composable("login") {
             val viewModel: LoginViewModel = viewModel() // instancia del ViewModel
             LoginScreen(viewModel = viewModel, navController = navController)
@@ -38,6 +40,10 @@ fun Navigation() {
         composable("calculator") {
             val viewModel: CalculatorViewModel = viewModel() // instancia del ViewModel
             CalculatorScreen(viewModel = viewModel, navController = navController)
+        }
+        composable("settings"){
+            val viewModel: SettingsViewModel = viewModel()
+            SettingsScreen(viewModel,navController= navController)
         }
         composable("tictactoe") {
             val viewModel: TicTacToeViewModel = viewModel() // instancia del ViewModel
@@ -60,5 +66,6 @@ fun Navigation() {
             PersonaScreen(viewModel, navController=navController)
         }
         //Nuevas rutas aca
+
     }
 }
